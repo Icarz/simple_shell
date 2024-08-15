@@ -2,47 +2,6 @@
 #include <string.h>
 
 /**
- * find_command_path - Finds the full path of a command using the PATH
- * @command: The command to find
- *
- * Return: The full path of the command, or NULL if not found
- */
-char *find_command_path(char *command)
-{
-    char *path_env = getenv("PATH");
-    char *path_copy = strdup(path_env);
-    char *path_token;
-    char *full_path;
-
-    path_token = strtok(path_copy, ":");
-    while (path_token != NULL)
-    {
-        full_path = malloc(strlen(path_token) + strlen(command) + 2);
-        if (full_path == NULL)
-        {
-            perror("malloc");
-            exit(EXIT_FAILURE);
-        }
-
-        strcpy(full_path, path_token);
-        strcat(full_path, "/");
-        strcat(full_path, command);
-
-        if (access(full_path, X_OK) == 0)
-        {
-            free(path_copy);
-            return full_path;
-        }
-
-        free(full_path);
-        path_token = strtok(NULL, ":");
-    }
-
-    free(path_copy);
-    return NULL;
-}
-
-/**
  * _puts - Prints a string to stdout
  * @str: The string to print
  */
@@ -89,9 +48,50 @@ char **strtow(char *str, char *delim)
         words[i] = strdup(token);
         token = strtok(NULL, delim);
     }
-    words[num_words] = NULL;
+    words[num_words] = NULL; /* Terminate the array with NULL */
 
     return (words);
+}
+
+/**
+ * find_command_path - Finds the full path of a command using the PATH
+ * @command: The command to find
+ *
+ * Return: The full path of the command, or NULL if not found
+ */
+char *find_command_path(char *command)
+{
+    char *path_env = getenv("PATH");
+    char *path_copy = strdup(path_env);
+    char *path_token;
+    char *full_path;
+
+    path_token = strtok(path_copy, ":");
+    while (path_token != NULL)
+    {
+        full_path = malloc(strlen(path_token) + strlen(command) + 2);
+        if (full_path == NULL)
+        {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+
+        strcpy(full_path, path_token);
+        strcat(full_path, "/");
+        strcat(full_path, command);
+
+        if (access(full_path, X_OK) == 0)
+        {
+            free(path_copy);
+            return full_path;
+        }
+
+        free(full_path);
+        path_token = strtok(NULL, ":");
+    }
+
+    free(path_copy);
+    return NULL;
 }
 
 /**
@@ -102,7 +102,7 @@ char **strtow(char *str, char *delim)
  */
 int is_builtin(char *command)
 {
-    if (strcmp(command, "exit") == 0)
+    if (strcmp(command, "exit") == 0 || strcmp(command, "env") == 0)
         return 1;
     return 0;
 }
@@ -119,8 +119,19 @@ int handle_builtin(char **argv)
     {
         exit(EXIT_SUCCESS);
     }
+    else if (strcmp(argv[0], "env") == 0)
+    {
+        char **env_ptr = environ;
+        while (*env_ptr != NULL)
+        {
+            _puts(*env_ptr);
+            _puts("\n");
+            env_ptr++;
+        }
+        return 0;
+    }
 
-    return 1;
+    return 1; // Not a recognized built-in
 }
 
 /**
