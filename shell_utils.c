@@ -15,7 +15,7 @@ int is_interactive(shell_info_t *info)
  * is_delimiter - Checks if a character is in the delimiter string
  * @c: Character to check
  * @delimiters: String containing delimiters
- * 
+ *
  * Return: 1 if c is a delimiter, 0 otherwise
  */
 int is_delimiter(char c, char *delimiters)
@@ -29,7 +29,7 @@ int is_delimiter(char c, char *delimiters)
 /**
  * is_alpha - Checks if a character is alphabetic
  * @c: Character to check
- * 
+ *
  * Return: 1 if c is alphabetic, 0 otherwise
  */
 int is_alpha(int c)
@@ -40,7 +40,7 @@ int is_alpha(int c)
 /**
  * string_to_int - Converts a string to an integer
  * @s: String to convert
- * 
+ *
  * Return: Converted integer value, or 0 if no numbers are found
  */
 int string_to_int(char *s)
