@@ -2,7 +2,7 @@
 
 /**
  * main - code for entry point of the shell
- * it returns: 0 on success,or exit on failur.
+ * Return: 0 on success,or exit on failur.
 **/
 int main(void)
 {
