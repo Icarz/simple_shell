@@ -10,6 +10,7 @@ char *line = NULL;
 size_t len = 0;
 ssize_t nread;
 pid_t pid;
+char *args[2];
 
 while (1)
 {
@@ -20,6 +21,9 @@ if (nread == -1)
 free(line);
 exit(EXIT_SUCCESS);
 }
+line[nread - 1] = '\0';
+args[0] = line;
+args[1] = NULL;
 pid = fork();
 if (pid == -1)
 {
