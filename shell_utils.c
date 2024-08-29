@@ -1,65 +1,99 @@
-#include "simple_shell.h"
+#include "shell.h"
 
 /**
- * is_interactive - Checks if the shell is running in interactive mode
- * @info: Pointer to the shell_info_t structure
- *
- * Return: 1 if in interactive mode, 0 otherwise
+ * lookforslash - identifies if first char is a slash.
+ * @cmd: first string
+ * Return: 1 if yes 0 if no.
  */
-int is_interactive(shell_info_t *info)
+int lookforslash(char *cmd)
 {
-	return (isatty(STDIN_FILENO) && info->input_fd <= 2);
-}
+	int cont = 0;
 
-/**
- * is_delimiter - Checks if a character is in the delimiter string
- * @c: Character to check
- * @delimiters: String containing delimiters
- *
- * Return: 1 if c is a delimiter, 0 otherwise
- */
-int is_delimiter(char c, char *delimiters)
-{
-	while (*delimiters)
-		if (*delimiters++ == c)
+	while (cmd[cont])
+	{
+		if (cmd[0] == '/')
+		{
+			printf("%c\n", cmd[0]);
 			return (1);
+		}
+
+		cont++;
+	}
 	return (0);
 }
 
 /**
- * is_alpha - Checks if a character is alphabetic
- * @c: Character to check
- *
- * Return: 1 if c is alphabetic, 0 otherwise
+ * compareExit - identifies if first char is a slash.
+ * @s1: first string
+ * @s2: exit string
+ * Return: 1 if yes 0 if no.
  */
-int is_alpha(int c)
+int compareExit(char *s1, char *s2)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	int i = 0;
+
+	for (; (*s2 != '\0' && *s1 != '\0') && *s1 == *s2; s1++)
+	{
+		if (i == 3)
+			break;
+		i++;
+		s2++;
+	}
+
+	return (*s1 - *s2);
 }
 
 /**
- * string_to_int - Converts a string to an integer
- * @s: String to convert
- *
- * Return: Converted integer value, or 0 if no numbers are found
+ * compareEnv - identifies if first char is a slash.
+ * @s1: first string
+ * @s2: exit string
+ * Return: 1 if yes 0 if no.
  */
-int string_to_int(char *s)
+int compareEnv(char *s1, char *s2)
 {
-	int i, sign = 1, state = 0, result = 0;
+	int i = 0;
 
-	for (i = 0; s[i] != '\0' && state != 2; i++)
+	for (; (*s2 != '\0' && *s1 != '\0') && *s1 == *s2; s1++)
 	{
-		if (s[i] == '-')
-			sign *= -1;
-
-		if (s[i] >= '0' && s[i] <= '9')
-		{
-			state = 1;
-			result = result * 10 + (s[i] - '0');
-		}
-		else if (state == 1)
-			state = 2;
+		if (i == 2)
+			break;
+		i++;
+		s2++;
 	}
 
-	return (sign * result);
+	return (*s1 - *s2);
+}
+/**
+ * identify_string - identyfy keyboard input.
+ * @parameter: call prompt from another function (prompt)
+ * Return: str
+ **/
+char **identify_string(char *parameter)
+{
+	char **buf = malloc(1024 * sizeof(char *));
+	char *split;
+	int i = 0;
+	char *delim = " \t\n";
+
+
+	split = strtok(parameter, delim);
+
+	while (split != NULL)
+	{
+		buf[i] = split;
+		i++;
+		split = strtok(NULL, delim);
+	}
+	execute_proc(buf);
+	return (buf);
+
+}
+/**
+ * controlC - avoid close the shell
+ * @sig: keep going shell
+ **/
+void  controlC(int sig)
+{
+	(void) sig;
+	write(1, "\n$ ", 3);
 }
