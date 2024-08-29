@@ -1,17 +1,15 @@
 #include "shell.h"
 
 /**
- * main - func with infinite loop
- * @ac: No use
- * @av: No use
- * Return: loop.
- **/
-int main(int ac, char **av)
-{
-	(void)av;
-	(void)ac;
+ * main - main of project shell
+ * Return: No return
+ */
 
-	signal(SIGINT, controlC);
-	prompt();
+int main(void)
+{
+	if (!(isatty(STDIN_FILENO)))
+		non_interactive_mode();
+	else
+		interactive_mode();
 	return (0);
 }

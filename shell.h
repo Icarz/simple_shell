@@ -1,34 +1,46 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
-#include <sys/wait.h>
-#include <sys/types.h>
+#ifndef SHELL_H
+#define SHELL_H
+
+#include "shell.h"
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <limits.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <sys/stat.h>
 
 extern char **environ;
 
-char *show_input(void);
-void prompt(void);
-char *_strcat(char *src);
-int _strlen(char *str);
-void place(char *str);
-char *findfile(char *command);
-char *find_command(char *command);
-int compare(char *s1, char *s2);
-int _strcmpdir(char *s1, char *s2);
-int charput(char c);
-void place(char *str);
-char *str_concat(char *s1, char *s2);
-int lookforslash(char *cmd);
-int compareExit(char *s1, char *s2);
-int compareEnv(char *s1, char *s2);
-void execute_proc(char **cmd);
-char **identify_string(char *parameter);
-void controlC(int sig);
+
+void exc_process(char **token_line, char **token_path, char *linea);
+void non_interactive_mode(void);
+void interactive_mode(void);
+
+/* STRING_UTILS */
+char  **our_strtok(char *str, const char *delim);
+int count_words(char *str, char *delim);
+
+/* UTILS */
+int largo(char *string);
+void ultimonulo(char *linea);
+char *buscar_path(void);
+int num_tokens(char **str);
+int _strcmpn(char *s1, char *s2, int n);
+
+/* PATH_UTILS */
+char *our_strcat(char *dest, char *src);
+void special_free(char **cartman);
+void add_command_path(int num_path, char **token_path, char **token_line);
+
+/* MEMORY_AND_SIGNAL */
+void *_calloc(unsigned int nmemb, unsigned int size);
+void handle_sigint(int sig);
+void set_null(char *linea);
+
+/* STRING_UTILS2 */
+char *no_spaces(char *linea);
+void sys_err(char *av, char *error, char *av_o);
+
 #endif
