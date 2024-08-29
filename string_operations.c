@@ -9,17 +9,17 @@
  */
 char *string_copy(char *dest, char *src)
 {
-    int i = 0;
+int i = 0;
 
-    if (dest == src || src == 0)
-        return (dest);
-    while (src[i])
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = 0;
-    return (dest);
+if (dest == src || src == 0)
+return (dest);
+while (src[i])
+{
+dest[i] = src[i];
+i++;
+}
+dest[i] = 0;
+return (dest);
 }
 
 /**
@@ -30,19 +30,19 @@ char *string_copy(char *dest, char *src)
  */
 char *string_duplicate(const char *str)
 {
-    int length = 0;
-    char *dup_str;
+int length = 0;
+char *dup_str;
 
-    if (str == NULL)
-        return (NULL);
-    while (*str++)
-        length++;
-    dup_str = malloc(sizeof(char) * (length + 1));
-    if (!dup_str)
-        return (NULL);
-    for (length++; length--;)
-        dup_str[length] = *--str;
-    return (dup_str);
+if (str == NULL)
+return (NULL);
+while (*str++)
+length++;
+dup_str = malloc(sizeof(char) * (length + 1));
+if (!dup_str)
+return (NULL);
+for (length++; length--;)
+dup_str[length] = *--str;
+return (dup_str);
 }
 
 /**
@@ -53,15 +53,15 @@ char *string_duplicate(const char *str)
  */
 void print_string(char *str)
 {
-    int i = 0;
+int i = 0;
 
-    if (!str)
-        return;
-    while (str[i] != '\0')
-    {
-        write_char(str[i]);
-        i++;
-    }
+if (!str)
+return;
+while (str[i] != '\0')
+{
+write_char(str[i]);
+i++;
+}
 }
 
 /**
@@ -72,15 +72,15 @@ void print_string(char *str)
  */
 int write_char(char c)
 {
-    static int buf_index;
-    static char buffer[WRITE_BUF_SIZE];
+static int buf_index;
+static char buffer[WRITE_BUF_SIZE];
 
-    if (c == BUF_FLUSH || buf_index >= WRITE_BUF_SIZE)
-    {
-        write(1, buffer, buf_index);
-        buf_index = 0;
-    }
-    if (c != BUF_FLUSH)
-        buffer[buf_index++] = c;
-    return (1);
+if (c == BUF_FLUSH || buf_index >= WRITE_BUF_SIZE)
+{
+write(1, buffer, buf_index);
+buf_index = 0;
+}
+if (c != BUF_FLUSH)
+buffer[buf_index++] = c;
+return (1);
 }

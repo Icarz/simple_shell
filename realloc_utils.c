@@ -10,11 +10,11 @@
  */
 char *fill_memory(char *memory, char byte, unsigned int n)
 {
-    unsigned int i;
+unsigned int i;
 
-    for (i = 0; i < n; i++)
-        memory[i] = byte;
-    return (memory);
+for (i = 0; i < n; i++)
+memory[i] = byte;
+return (memory);
 }
 
 /**
@@ -23,13 +23,13 @@ char *fill_memory(char *memory, char byte, unsigned int n)
  */
 void free_string_array(char **string_array)
 {
-    char **temp = string_array;
+char **temp = string_array;
 
-    if (!string_array)
-        return;
-    while (*string_array)
-        free(*string_array++);
-    free(temp);
+if (!string_array)
+return;
+while (*string_array)
+free(*string_array++);
+free(temp);
 }
 
 /**
@@ -42,22 +42,20 @@ void free_string_array(char **string_array)
  */
 void *reallocate_memory(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-    char *new_ptr;
+char *new_ptr;
 
-    if (!ptr)
-        return (malloc(new_size));
-    if (!new_size)
-        return (free(ptr), NULL);
-    if (new_size == old_size)
-        return (ptr);
-
-    new_ptr = malloc(new_size);
-    if (!new_ptr)
-        return (NULL);
-
-    old_size = old_size < new_size ? old_size : new_size;
-    while (old_size--)
-        new_ptr[old_size] = ((char *)ptr)[old_size];
-    free(ptr);
-    return (new_ptr);
+if (!ptr)
+return (malloc(new_size));
+if (!new_size)
+return (free(ptr), NULL);
+if (new_size == old_size)
+return (ptr);
+new_ptr = malloc(new_size);
+if (!new_ptr)
+return (NULL);
+old_size = old_size < new_size ? old_size : new_size;
+while (old_size--)
+new_ptr[old_size] = ((char *)ptr)[old_size];
+free(ptr);
+return (new_ptr);
 }
