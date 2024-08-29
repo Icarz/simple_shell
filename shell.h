@@ -1,5 +1,5 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -73,8 +73,8 @@ int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 int loophsh(char **);
-void _eputs(char *);
-int _eputchar(char);
+void _eputs(char *str);
+int _eputchar(char c);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 int _strlen(char *);
