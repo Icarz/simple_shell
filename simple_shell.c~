@@ -1,0 +1,45 @@
+#include "shell.h"
+
+/**
+ * main - code for entry point of the shell
+ * it returns: 0 on success,or exit on failur.
+**/
+int main(void)
+{
+char *line = NULL;
+size_t len = 0;
+ssize_t nread;
+pid_t pid;
+
+while (1)
+{
+prompt();
+nread = getline(&line, &len, stdin);
+if (nread == -1)
+{
+free(line);
+exit(EXIT_SUCCESS);
+}
+pid = fork();
+if (pid == -1)
+{
+perror("./shell");
+free(line);
+exit(EXIT_FAILURE);
+}
+else if (pid == 0)
+{
+char *args[2] = {line, NULL};
+execve(args[0], args, environ);
+perror("./shell");
+free(line);
+exit(EXIT_FAILURE);
+}
+else
+{
+wait(NULL);
+}
+}
+free(line);
+return (0);
+}
