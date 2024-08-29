@@ -1,9 +1,0 @@
-#includ "shell.h"
-
-/**
- * propmpt - display
- */
-void propmpt(void)
-{
-write(STDOUT_FILENO, "#cisfun$ ", 9);
-}
