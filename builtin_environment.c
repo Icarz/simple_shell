@@ -3,7 +3,7 @@
 /**
  * builtin_env - Displays the current environment variables
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_env(shell_info_t *info)
@@ -16,7 +16,7 @@ int builtin_env(shell_info_t *info)
  * get_env_value - Retrieves the value of an environment variable
  * @info: Pointer to the shell_info_t structure
  * @variable_name: Name of the environment variable
- * 
+ *
  * Return: Value of the environment variable, or NULL if not found
  */
 char *get_env_value(shell_info_t *info, const char *variable_name)
@@ -37,7 +37,7 @@ char *get_env_value(shell_info_t *info, const char *variable_name)
 /**
  * builtin_setenv - Initializes or modifies an environment variable
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0 on success, 1 on error
  */
 int builtin_setenv(shell_info_t *info)
@@ -55,7 +55,7 @@ int builtin_setenv(shell_info_t *info)
 /**
  * builtin_unsetenv - Removes an environment variable
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_unsetenv(shell_info_t *info)
@@ -76,7 +76,7 @@ int builtin_unsetenv(shell_info_t *info)
 /**
  * populate_env_list - Populates the environment linked list
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int populate_env_list(shell_info_t *info)

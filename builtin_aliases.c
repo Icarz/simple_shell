@@ -3,7 +3,7 @@
 /**
  * builtin_history - Displays the command history list with line numbers
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_history(shell_info_t *info)
@@ -16,7 +16,7 @@ int builtin_history(shell_info_t *info)
  * remove_alias - Removes an alias from the list
  * @info: Pointer to the shell_info_t structure
  * @alias_str: The alias string to remove
- * 
+ *
  * Return: Always 0 on success, 1 on error
  */
 int remove_alias(shell_info_t *info, char *alias_str)
@@ -39,7 +39,7 @@ int remove_alias(shell_info_t *info, char *alias_str)
  * add_alias - Adds a new alias or updates an existing one
  * @info: Pointer to the shell_info_t structure
  * @alias_str: The alias string to add or update
- * 
+ *
  * Return: Always 0 on success, 1 on error
  */
 int add_alias(shell_info_t *info, char *alias_str)
@@ -59,7 +59,7 @@ int add_alias(shell_info_t *info, char *alias_str)
 /**
  * display_alias - Prints the alias string in the format key='value'
  * @node: The alias node
- * 
+ *
  * Return: Always 0 on success, 1 on error
  */
 int display_alias(list_t *node)
@@ -82,7 +82,7 @@ int display_alias(list_t *node)
 /**
  * builtin_alias - Handles alias commands
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_alias(shell_info_t *info)
