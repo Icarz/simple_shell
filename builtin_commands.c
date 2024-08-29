@@ -3,7 +3,7 @@
 /**
  * builtin_exit - Exits the shell with a given status
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: -2 to indicate the shell should exit, 1 if an error occurred
  */
 int builtin_exit(shell_info_t *info)
@@ -31,7 +31,7 @@ int builtin_exit(shell_info_t *info)
 /**
  * builtin_cd - Changes the current directory of the process
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_cd(shell_info_t *info)
@@ -46,7 +46,7 @@ int builtin_cd(shell_info_t *info)
 	{
 		target_dir = get_environment_variable(info, "HOME=");
 		if (!target_dir)
-			change_dir_result = chdir((target_dir = get_environment_variable(info, "PWD=")) ? target_dir : "/");
+change_dir_result = chdir((target_dir = get_environment_variable(info, "PWD=")) ? target_dir : "/");
 		else
 			change_dir_result = chdir(target_dir);
 	}
@@ -60,7 +60,7 @@ int builtin_cd(shell_info_t *info)
 		}
 		print_error_message(get_environment_variable(info, "OLDPWD="));
 		print_char_error('\n');
-		change_dir_result = chdir((target_dir = get_environment_variable(info, "OLDPWD=")) ? target_dir : "/");
+change_dir_result = chdir((target_dir = get_environment_variable(info, "OLDPWD=")) ? target_dir : "/");
 	}
 	else
 		change_dir_result = chdir(info->arguments[1]);
@@ -72,7 +72,7 @@ int builtin_cd(shell_info_t *info)
 	}
 	else
 	{
-		set_environment_variable(info, "OLDPWD", get_environment_variable(info, "PWD="));
+set_environment_variable(info, "OLDPWD", get_environment_variable(info, "PWD="));
 		set_environment_variable(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
@@ -81,7 +81,7 @@ int builtin_cd(shell_info_t *info)
 /**
  * builtin_help - Displays a help message
  * @info: Pointer to the shell_info_t structure
- * 
+ *
  * Return: Always 0
  */
 int builtin_help(shell_info_t *info)
