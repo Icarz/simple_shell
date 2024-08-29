@@ -106,12 +106,10 @@ sign = '-';
 digits = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 ptr = &buffer[49];
 *ptr = '\0';
-do
-{
+do {
 *--ptr = digits[num % base];
 num /= base;
-}
-while
+} while
 (num != 0);
 if (sign)
 {
